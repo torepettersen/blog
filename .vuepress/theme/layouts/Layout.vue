@@ -12,6 +12,13 @@
 					h1(:id='toKebabCase($frontmatter.title)')
 							a.header-anchor(:href='`#${toKebabCase($page.frontmatter.title)}`', area-hidden='true') #
 							| {{ $frontmatter.title }}
+					span.meta
+						template(v-if="$page.frontmatter.date")
+							i.fas.fa-clock
+							span  {{ formatDate($page.frontmatter.date) }}&ensp;
+						template(v-if="$page.frontmatter.categories && $page.frontmatter.categories.length")
+							i.fas.fa-layer-group
+							span  {{ formatCategories($page.frontmatter.categories) }}
 					Content
 
 				footer
@@ -46,7 +53,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import "../styles/fontawesome.scss";
+
+.content__default {
+	margin-top: 1.8rem;
+}
 
 footer {
 	margin-top: 5rem;
