@@ -1,5 +1,6 @@
 module.exports = {
   title: 'Cloudmaker',
+  dest: 'dist',
   themeConfig: {
     nav: [
       { text: 'Blog', link: '/' },

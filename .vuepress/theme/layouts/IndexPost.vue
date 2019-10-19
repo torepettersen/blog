@@ -36,11 +36,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/fontawesome.scss";
 
-.theme-default-content:not(.custom) > :first-child {
-  margin-top: 0;
+.theme-default-content:not(.custom) {
+  & > .list {
+    margin-top: 0;
+  }
 }
 
 .header-image {
