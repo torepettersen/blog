@@ -11,7 +11,7 @@
 					template(v-if="page.frontmatter.date")
 						i.fas.fa-clock
 						span  {{ formatDate(page.frontmatter.date) }}&ensp;
-					template(v-if="page.frontmatter.categories")
+					template(v-if="page.frontmatter.categories && page.frontmatter.categories.length")
 						i.fas.fa-layer-group
 						span  {{ formatCategories(page.frontmatter.categories) }}
 </template>
