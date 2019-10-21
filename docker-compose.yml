@@ -1,11 +1,12 @@
 version: '3'
 services:
   main:
+    image: toreskog/cloudmaker:latest
     build: 
       context: .
       args:
         CF_Key: $CF_Key
         CF_Email: $CF_Email
     ports:
+      - '80:80'
       - '443:443'
-    command: "/bin/sh -c 'while :; do sleep 12h; ~/.acme.sh/acme.sh --renew -d cloudmaker.dev; nginx -s reload; done & nginx -g \"daemon off;\"'"

@@ -25,3 +25,5 @@ RUN apk add --no-cache curl openssl && \
     mkdir /app
 COPY --from=build /app/dist /app
 COPY nginx.conf /etc/nginx/nginx.conf
+
+CMD /bin/sh -c 'while :; do sleep 12h; ~/.acme.sh/acme.sh --renew -d cloudmaker.dev; nginx -s reload; done & nginx -g "daemon off;"'
