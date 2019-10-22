@@ -7,6 +7,9 @@ services:
       args:
         CF_Key: $CF_Key
         CF_Email: $CF_Email
+    environment:
+      CF_Key: $CF_Key
+      CF_Email: $CF_Email
     ports:
       - '80:80'
       - '443:443'
