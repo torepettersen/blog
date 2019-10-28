@@ -4,6 +4,12 @@ services:
     image: toreskog/cloudmaker:latest
     build: 
       context: .
+    ports:
+      - '5000:8080'
+  proxy:
+    image: toreskog/cloudmaker-proxy:latest
+    build: 
+      context: ./proxy
       args:
         CF_Key: $CF_Key
         CF_Email: $CF_Email
