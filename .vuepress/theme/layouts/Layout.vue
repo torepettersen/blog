@@ -1,46 +1,51 @@
 <template lang="pug">
-	.theme-container(:class='pageClasses', @touchstart='onTouchStart', @touchend="onTouchEnd")
-		
-		Navbar(v-if='shouldShowNavbar', @toggle-sidebar='toggleSidebar')
+  .theme-container(:class='pageClasses', @touchstart='onTouchStart', @touchend="onTouchEnd")
+    
+    Navbar(v-if='shouldShowNavbar', @toggle-sidebar='toggleSidebar')
 
-		Sidebar(:items='sidebarItems', @toggle-sidebar='toggleSidebar')
+    Sidebar(:items='sidebarItems', @toggle-sidebar='toggleSidebar')
 
-		main.page
-			slot(name='header')
-			
-			.theme-default-content
-				slot
-					h1(:id='toKebabCase($frontmatter.title)')
-							a.header-anchor(:href='`#${toKebabCase($page.frontmatter.title)}`', area-hidden='true') #
-							| {{ $frontmatter.title }}
-					span.meta
-						template(v-if="$page.frontmatter.date")
-							i.fas.fa-clock
-							span  {{ formatDate($page.frontmatter.date) }}&ensp;
-						template(v-if="$page.frontmatter.categories && $page.frontmatter.categories.length")
-							i.fas.fa-layer-group
-							span  {{ formatCategories($page.frontmatter.categories) }}
-					Content
+    main.page
+      slot(name='header')
+      
+      .theme-default-content
+        slot
+          h1(:id='toKebabCase($frontmatter.title)')
+              a.header-anchor(:href='`#${toKebabCase($page.frontmatter.title)}`', area-hidden='true') #
+              | {{ $frontmatter.title }}
+          span.meta
+            template(v-if="$page.frontmatter.date")
+              i.fas.fa-clock
+              span  {{ formatDate($page.frontmatter.date) }}&ensp;
+            template(v-if="$page.frontmatter.categories && $page.frontmatter.categories.length")
+              i.fas.fa-layer-group
+              span  {{ formatCategories($page.frontmatter.categories) }}
+          Content
+          
+          br
+          EmailForm
 
-				footer
-					p &copy; Tore Pettersen
-		
+        footer
+          p &copy; Tore Pettersen
+    
 
 </template>
 
 <script>
 import Navbar from '@theme/components/Navbar.vue';
 import Sidebar from '@theme/components/Sidebar.vue';
+import EmailForm from '@theme/components/EmailForm.vue';
 import spacetime from 'spacetime';
 import { resolveSidebarItems } from '../util';
 
 export default {
-	components: {
-		Navbar,
-		Sidebar,
-	},
+  components: {
+    Navbar,
+    Sidebar,
+    EmailForm,
+  },
 
-	data () {
+  data () {
     return {
       isSidebarOpen: false
     }
@@ -91,13 +96,13 @@ export default {
     }
   },
 
-	mounted () {
+  mounted () {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
     })
   },
 
-	methods: {
+  methods: {
     formatDate(date) {
       return spacetime(date).format('{month-short} {date-ordinal}, {year}');
     },
@@ -109,8 +114,8 @@ export default {
         .replace(/[^a-zA-Z\s]/g, '')
         .replace(/\s+/g, '-')
         .toLowerCase();
-		},
-		toggleSidebar (to) {
+    },
+    toggleSidebar (to) {
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
       this.$emit('toggle-sidebar', this.isSidebarOpen)
     },
@@ -140,12 +145,12 @@ export default {
 @import "../styles/fontawesome.scss";
 
 .content__default {
-	margin-top: 1.8rem;
+  margin-top: 1.8rem;
 }
 
 footer {
-	margin-top: 5rem;
-	border-top: 1px solid #eaecef;  
+  margin-top: 5rem;
+  border-top: 1px solid #eaecef;  
 
   p {
     padding: 0.8rem 0 1rem;

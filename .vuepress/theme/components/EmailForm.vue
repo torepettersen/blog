@@ -1,5 +1,6 @@
 <template lang="pug">
-div
+.form-container
+  h4 Never miss an article about about building the cloud with Rust
   form.subscribe-form(@submit.prevent='submit', novalidate)
     input(type='email', v-model='params.EMAIL', placeholder='Your email address')
     button.submit(type='submit') Subscribe
@@ -50,14 +51,17 @@ export default {
 @import "../styles/palette.scss";
 $borderRadius: 0.5rem;
 
-.subscribe-form {
-  display: flex;
+.form-container {
+  text-align: center;
+}
 
+.subscribe-form {
   & * {
     font-size: 0.9rem;
     line-height: 2rem;
     padding: 0 1rem;
     display: inline-block;
+    border: 1px solid $accentColor;
   }
 
   :first-child {
@@ -75,7 +79,6 @@ $borderRadius: 0.5rem;
   input {
     cursor: text;
     color: #4e6e8e;
-    border: 1px solid $accentColor;
     outline: none;
     transition: all 0.2s ease;
   }
@@ -83,13 +86,13 @@ $borderRadius: 0.5rem;
   .submit {
     cursor: pointer;
     background-color: $accentColor;
-    border: 0;
     color: #fff;
     transition: background-color .1s ease;
   }
 }
 
 .message {
+  margin-top: 0.2rem;
   font-size: 0.9rem;
 }
 
