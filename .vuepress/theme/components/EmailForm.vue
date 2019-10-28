@@ -1,15 +1,50 @@
 <template lang="pug">
 div
-  form.subscribe-form(
-    action='https://dev.us20.list-manage.com/subscribe/post?u=b5cba5b1a8baa382a74542a78&amp;id=ddc2acb3df',
-    method='post'
-  )
-    input(name='email', type='email', placeholder='Your email address')
-    input(type='hidden' name='b_b5cba5b1a8baa382a74542a78_ddc2acb3df' tabindex='-1' value='')
-    button.submit(type='submit', name='subscribe') Subscribe
+  form.subscribe-form(@submit.prevent='submit', novalidate)
+    input(type='email', v-model='params.EMAIL', placeholder='Your email address')
+    button.submit(type='submit') Subscribe
+  .message {{ message }}
 </template>
 
+<script>
+import axios from 'axios';
 
+export default {
+  data() {
+    return {
+      message: '',
+      params: {
+        EMAIL: '',
+        u: 'b5cba5b1a8baa382a74542a78',
+        id: 'ddc2acb3df',
+      },
+    }
+  },
+
+  methods: {
+    async submit() {
+      try {
+        const { data } = await axios.get('/api/subscribe', { params: this.params });
+        if (data.result === 'error') {
+          if (/0 -/.test(data.msg)) {
+            this.message = 'Looks like that email address is invalid. Mind trying again?';
+          }
+          else {
+            this.message = data.msg;
+          }
+        }
+        else if (data.result === 'success') {
+          this.message = 'Almost done. Please confirm your email by clicking the link in the email that was just sent.';
+        }
+      }
+      catch (err) {
+        this.message = 'Seems like something went wrong! Please check that you are still online or try again later.';
+      }
+
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import "../styles/palette.scss";
@@ -54,5 +89,8 @@ $borderRadius: 0.5rem;
   }
 }
 
+.message {
+  font-size: 0.9rem;
+}
 
 </style>
