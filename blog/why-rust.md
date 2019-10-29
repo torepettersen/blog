@@ -1,7 +1,7 @@
 ---
 title: "Why Rust?"
 date: 2019-10-29T22:02:00+01:00
-categories: []
+categories: [rust]
 ---
 
 For most programming languages I feel you have to sacrifice either safety and convenience or performance.

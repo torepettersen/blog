@@ -26,7 +26,9 @@
           EmailForm
 
         footer
-          p &copy; Tore Pettersen
+          span &copy; Tore Pettersen
+          span
+            a(href='mailto:tore@cloudmaker.dev') Contact Me
     
 
 </template>
@@ -143,17 +145,22 @@ export default {
 
 <style lang="scss">
 @import "../styles/fontawesome.scss";
+@import "../styles/palette.scss";
 
 .content__default {
   margin-top: 1.8rem;
 }
 
 footer {
+  display: flex;
+  justify-content: space-between; 
   margin-top: 5rem;
-  border-top: 1px solid #eaecef;  
+  padding: 1.8rem 0 1rem;
+  border-top: 1px solid #eaecef;
 
-  p {
-    padding: 0.8rem 0 1rem;
+  a {
+    color: $textColor;
+    font-weight: 400;
   }
 }
 </style>
