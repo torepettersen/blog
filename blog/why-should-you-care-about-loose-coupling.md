@@ -88,5 +88,5 @@ But wait, this will break our API’s don’t it? Yes, it will, but it is actual
 
 ## What is coming next?
 
-The next blog post will be a tutorial on how to create a REST API with Rust, Actix Web, and Diesel. So if you haven’t already signed up for the newsletter, make sure to do so you will be the first to know when it is published.
+The next blog post will be a tutorial on how to create a REST API with Rust, Actix Web, and Diesel. If you don’t want to miss out on that, you could sign up for the newsletter and be the first one to know when it is published.
 
