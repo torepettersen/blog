@@ -31,6 +31,12 @@ module.exports = {
         ],
       },
     ],
+    [
+      '@vuepress/google-analytics',
+      {
+        'ga': 'UA-108027686-2',
+      }
+    ]
     // ['vuepress-plugin-clean-urls'],
   ],
 }

@@ -4,7 +4,7 @@
   form.subscribe-form(@submit.prevent='submit', novalidate)
     input(type='email', v-model='params.EMAIL', placeholder='Your email address')
     button.submit(type='submit') Subscribe
-  .message {{ message }}
+  .message(v-html='message')
 </template>
 
 <script>
