@@ -10,7 +10,7 @@ You can reduce the chance of these problems by having different parts of your ap
 
 A loosely coupled application is also a lot easier to split into smaller services if you ever need it. This will be helpful if you ever consider splitting your monolith into microservices.
 
-I have found quite a lot of reasoning about why you should go for a loosely coupled application, but I have found it a bit harder to find some practical examples of how to do that. So here are a few tips to make your application more loosely coupled.
+I have found it a bit hard to find some good practical examples on how to build a loosely coupled application. So here are a few tips you can follow to make your application more loosely coupled.
 
 ## Folder structure
 
@@ -31,7 +31,7 @@ With a folder structure like this, you need to open several folders to understan
 
 And also if we ever want to split this into several services, we have to sort through several different folders to connect the parts we need.
 
-An alternative way is to group the foulders by feature, like this.
+An alternative way is to group the folders by feature, like this.
 ```
 .
 ├── order
@@ -61,8 +61,8 @@ So how does a good API look like? The best tip I can give is just to keep it sim
 ``` rust
 #[get("/users/{id}")]
 fn find(id: web::Path<Uuid>) -> Result<HttpResponse, ApiError> {
-   let user = User::find(id.into_inner())?;
-   Ok(HttpResponse::Ok().json(user))
+    let user = User::find(id.into_inner())?;
+    Ok(HttpResponse::Ok().json(user))
 }
 ```
 
@@ -70,8 +70,8 @@ I have seen quite a lot of examples in the rust community where the API connecti
 ``` rust
 #[get("/users/{id}")]
 fn find(conn: web::Data<PgConnection>, id: web::Path<Uuid>) -> Result<HttpResponse, ApiError> {
-   let user = User::find(conn.into_inner(), id.into_inner())?;
-   Ok(HttpResponse::Ok().json(user))
+    let user = User::find(conn.into_inner(), id.into_inner())?;
+    Ok(HttpResponse::Ok().json(user))
 }
 ```
 Right away you will probably not have any problems going for this approach. But you will probably at some time want to do any changes to this API, like adding a cache or maybe publish or subscribe to an event queue.
@@ -84,7 +84,7 @@ I don’t suggest starting out with a microservice architecture since that will 
 
 If you followed the tips above you will have a lot easier time to split the different parts of your application into smaller services. You can easily do that by just drag and drop the folders for each feature into your new service.
 
-But wait, this will break our API’s don’t it? Yes, it will, but it is actually a quite easy solution for fixing that since all the users of our API’s don’t make any assumptions on how the API is working. This means that we could just rewrite our APIs to make a remote procedure calls to our newly created service, which will handle the request. And the user of the API doesn’t have to do any changes since the API still looks the same.
+But wait, this will break our APIs, doesn't it? Yes, it will, but it is actually a quite easy solution for fixing that since all the users of our APIs don’t make any assumptions on how the API is working. This means that we could just rewrite our APIs to make a remote procedure calls to our newly created service, which will handle the request. And the user of the API doesn’t have to do any changes since the API still looks the same.
 
 ## What is coming next?
 

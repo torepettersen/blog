@@ -8,11 +8,12 @@ use listenfd::ListenFd;
 use std::env;
 
 #[get("/")]
-fn index() -> impl Responder {
+async fn index() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
 }
 
-fn main() -> std::io::Result<()> {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     dotenv().ok();
     env_logger::init();
 
@@ -32,5 +33,5 @@ fn main() -> std::io::Result<()> {
     };
 
     info!("Starting server");
-    server.run()
+    server.run().await
 }

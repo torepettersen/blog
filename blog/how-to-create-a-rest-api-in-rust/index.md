@@ -1,11 +1,11 @@
 ---
-title: "How to create a REST API in Rust"
-description: "A tutorial on how to create a REST API in Rust with Actix web framework and Diesel ORM."
-categories: [rust]
+title: "Rust Web Development Tutorial: REST API"
+description: "A tutorial on how to create a REST API in Rust with Actix web framework 2.0 and Diesel ORM."
+categories: [rust, tutorial]
 date: 2019-11-14T22:52:00
 ---
 
-In this tutorial, we are going to create a REST API in Rust with Actix web and Diesel. We will be using Postgres as our database, so if you don’t have Postgres installed on your computer, you should do that first.
+In this tutorial, we are going to create a REST API in Rust with Actix web 2.0 and Diesel. We will be using Postgres as our database, so if you don’t have Postgres installed on your computer, you should do that first.
 
 ## Hello world
 We are going to start by creating our project with Cargo and move into the project directory. 
@@ -18,7 +18,8 @@ $ cd rest_api
 We need to add Actix web to our dependencies for our first example. So let’s add that to the `Cargo.toml`.
 ``` toml
 [dependencies]
-actix-web = "1.0"
+actix-web = "2.0"
+actix-rt = "1.0"
 ```
 
 And then we set up the request handler and server in `src/main.rs`.
@@ -58,7 +59,7 @@ You would probably deploy your code at some point. Then you might want to run th
 
 Also when you deploy your code you could be sure that it will run into problems at some point. And to help with solving these problems it is important with good logging, so that we could figure out what went wrong and solve the problem.
 
-For setting up environment variables and loggin we are going to add another few dependencies.
+For setting up environment variables and logging we are going to add another few dependencies.
 ``` toml
 [dependencies]
 dotenv = "0.11"

@@ -1,7 +1,7 @@
 ---
-title: "How to authenticate users in Rust"
-description: "A tutorial on how to authenticate users in Rust with Actix web framework and Diesel ORM."
-categories: [rust]
+title: "Rust Web Development Tutorial: Authentication"
+description: "A tutorial on how to authenticate users in Rust with Actix web framework 2.0 and Diesel ORM."
+categories: [rust, tutorial]
 date: 2019-11-23T14:02:00
 ---
 
@@ -52,7 +52,7 @@ use crate::user::{User, UserMessage};
 use actix_web::{post, get, web, HttpResponse};
 
 #[post("/register")]
-fn register(user: web::Json<UserMessage>) -> Result<HttpResponse, ApiError> {
+async fn register(user: web::Json<UserMessage>) -> Result<HttpResponse, ApiError> {
     let user = User::create(user.into_inner())?;
     Ok(HttpResponse::Ok().json(user))
 }
@@ -78,7 +78,8 @@ Then we can connect our new module with the rest of our application.
 // ...
 mod auth;
 
-fn main() -> std::io::Result<()> {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     // ...
     let mut server = HttpServer::new(|| 
         App::new()
@@ -100,8 +101,8 @@ For handling sessions, we are going to need another couple of dependencies.
 
 ``` toml
 [dependencies]
-actix-redis = { version = "0.7", features = ["web"] }
-actix-session = "0.2"
+actix-redis = { version = "0.8", features = ["web"] }
+actix-session = "0.3"
 ```
 
 To let our application know where to find Redis we are going to add another couple of environment variables.
@@ -117,7 +118,8 @@ We also have to set up the middleware that will handle the sessions for us.
 // ...
 use actix_redis::RedisSession;
 
-fn main() -> std::io::Result<()> {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     // ...
     let redis_port = env::var("REDIS_PORT").expect("Redis port not set");
     let redis_host = env::var("REDIS_HOST").expect("Redis host not set");
@@ -174,7 +176,7 @@ use uuid::Uuid;
 // ...
 
 #[post("/sign-in")]
-fn sign_in(credentials: web::Json<UserMessage>, session: Session) -> Result<HttpResponse, ApiError> {
+async fn sign_in(credentials: web::Json<UserMessage>, session: Session) -> Result<HttpResponse, ApiError> {
     let credentials = credentials.into_inner();
 
     let user = User::find_by_email(credentials.email)
@@ -199,7 +201,7 @@ fn sign_in(credentials: web::Json<UserMessage>, session: Session) -> Result<Http
 }
 
 #[post("/sign-out")]
-fn sign_out(session: Session) -> Result<HttpResponse, ApiError> {
+async fn sign_out(session: Session) -> Result<HttpResponse, ApiError> {
     let id: Option<Uuid> = session.get("user_id")?;
 
     if let Some(_) = id {
@@ -230,7 +232,7 @@ Now let’s use the session data to get out the user information. So let’s cre
 // src/auth/routes.rs
 // ...
 #[get("/who-am-i")]
-fn who_am_i(session: Session) -> Result<HttpResponse, ApiError> {
+async fn who_am_i(session: Session) -> Result<HttpResponse, ApiError> {
     let id: Option<Uuid> = session.get("user_id")?;
 
     if let Some(id) = id {

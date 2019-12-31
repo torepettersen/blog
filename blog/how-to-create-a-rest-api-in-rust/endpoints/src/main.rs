@@ -9,7 +9,8 @@ use std::env;
 
 mod user;
 
-fn main() -> std::io::Result<()> {
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
     dotenv().ok();
     env_logger::init();
 
@@ -29,5 +30,5 @@ fn main() -> std::io::Result<()> {
     };
 
     info!("Starting server");
-    server.run()
+    server.run().await
 }

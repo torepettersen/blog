@@ -4,7 +4,7 @@ use actix_web::{get, post, put, delete, web, HttpResponse, Responder};
 use serde_json::json;
 
 #[get("/users")]
-fn find_all() -> impl Responder {
+async fn find_all() -> impl Responder {
     HttpResponse::Ok().json(
         vec![
             User { id: 1, email: "tore@cloudmaker.dev".to_string() },
@@ -14,24 +14,24 @@ fn find_all() -> impl Responder {
 }
 
 #[get("/users/{id}")]
-fn find() -> impl Responder {
+async fn find() -> impl Responder {
     HttpResponse::Ok().json(
         User { id: 1, email: "tore@cloudmaker.dev".to_string() }
     )
 }
 
 #[post("/users")]
-fn create(user: web::Json<User>) -> impl Responder {
+async fn create(user: web::Json<User>) -> impl Responder {
     HttpResponse::Created().json(user.into_inner())
 }
 
 #[put("/users/{id}")]
-fn update(user: web::Json<User>) -> impl Responder {
+async fn update(user: web::Json<User>) -> impl Responder {
     HttpResponse::Ok().json(user.into_inner())
 }
 
 #[delete("/users/{id}")]
-fn delete() -> impl Responder {
+async fn delete() -> impl Responder {
     HttpResponse::Ok().json(json!({"message": "Deleted"}))
 }
 
