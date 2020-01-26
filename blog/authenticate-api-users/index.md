@@ -5,7 +5,7 @@ categories: [rust, tutorial]
 date: 2019-11-23T14:02:00
 ---
 
-In this tutorial, we are going to create Authentication for the REST API that we made in the [last tutorial](/how-to-create-a-rest-api-in-rust/), so I highly recommend reading that first. Alternatively, you can clone the code from the last tutorial on [github](https://github.com/thecloudmaker/actix-web-rest-api).
+In this tutorial, we are going to create Authentication for the REST API that we made in the [last tutorial](/how-to-create-a-rest-api-in-rust/), so I highly recommend reading that first. Alternatively, you can clone the code from the last tutorial on [github](https://github.com/thecloudmaker/actix_tutorials/tree/master/rest_api).
 We will be using Redis for handling our sessions, so if you don’t have Redis installed on your computer, you should do that first.
 
 ## Password hashing
@@ -254,7 +254,7 @@ pub fn init_routes(cfg: &mut web::ServiceConfig) {
 
 Now if we hit the newly created endpoint we should get the user data if we are signed in and a status 401 if we are not.
 
-The complete source code for this tutorial is available on [github](https://github.com/thecloudmaker/actix-web-redis-session) in case you need it.
+The complete source code for this tutorial is available on [github](https://github.com/thecloudmaker/actix_tutorials/tree/master/authentication) in case you need it.
 
 ## What is up next?
 

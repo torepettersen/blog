@@ -94,7 +94,7 @@ Now let’s give it a try. First use the invite endpoint to send yourself the co
 
 ![Registered](./Registered.png)
 
-The complete code example for this tutorial is available on [github](https://github.com/thecloudmaker/actix-web-email-verification).
+The complete code example for this tutorial is available on [github](https://github.com/thecloudmaker/actix_tutorials/tree/master/email_verification).
 
 ## What is up next?
 Now that you know how to create a REST API in Rust, you will probably make an app that will get a lot of users. Our endpoint for finding all the users will be giving us back way to many users. Therefore the next tutorial will be about how we can narrow down the results with filtering and also allow for sorting of the results.

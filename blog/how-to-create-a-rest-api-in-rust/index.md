@@ -188,6 +188,8 @@ Now we just have to add `db`, `schema` and `api_error` models in our main file. 
 
 We should now be able to create, read, update and delete users via the endpoints.
 
+In case you need it you can also find the complete code on [github](https://github.com/thecloudmaker/actix_tutorials/tree/master/rest_api).
+
 In case you have any questions or suggestions for improvement, feel free to contact me. You could also contact me in case you have suggestions for tutorials or topics I could cover in an upcoming blog post.
 
 Next up I am planning to show how to Authenticate our users. I also have a list of other topics that I plan to cover and you could be the first to know by signing up for the newsletter.
