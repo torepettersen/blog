@@ -73,11 +73,11 @@ impl User {
     //..
 }
 ```
-Notice that we are using `.into_boxed() when we create the initial query. This is used to box the query into a single type so that the compiler knows how to deal with it when we build our conditional query.
+Notice that we are using `.into_boxed()` when we create the initial query. This is used to box the query into a single type so that the compiler knows how to deal with it when we build our conditional query.
 
-You probably also notice that we have to be quite explicit about the behavior of our API. For every single parameter, we have defined the expected behavior and we also have to define every possible parameter for sorting. The good thing about that is that we know what to expect from our API and we will not end up with any surprising behavior.
+You probably also notice that we have to be quite explicit about the behavior of our API. For every single parameter, we have to define the expected behavior and we also have to define every possible parameter for sorting. The good thing about that is that we know what to expect from our API and we will not end up with any surprising behavior.
 
-If you are a bit like me you would probably also think that this kind of code is a bit messy. I feel that I have to repeat myself a bit too much by writing this kind of behavior over and over again when I write several APIs. To solve that problem we can use [macros](https://doc.rust-lang.org/1.29.0/book/2018-edition/appendix-04-macros.html), but I will be covering that in a upcoming tutorial.
+If you are a bit like me you would probably also think that this kind of code is a bit messy. I feel that I have to repeat myself a bit too much by writing this kind of behavior over and over again when I write several APIs. To solve that problem we can use [macros](https://doc.rust-lang.org/1.29.0/book/2018-edition/appendix-04-macros.html), but I will be covering that in an upcoming tutorial.
 Next, we need to grab the parameters from the request and pass them to our API.
 
 ``` rust

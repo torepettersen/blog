@@ -4,6 +4,18 @@ use rand::Rng;
 // ...
 
 impl User {
+    // ..
+    pub fn create(user: UserMessage) -> Result<Self, ApiError> {
+        let conn = db::connection()?;
+
+        let mut user = User::from(user);
+        user.hash_password()?;
+        let user = diesel::insert_into(user::table)
+            .values(user)
+            .get_result(&conn)?;
+
+        Ok(user)
+    }
     // ...
     pub fn hash_password(&mut self) -> Result<(), ApiError> {
         let salt: [u8; 32] = rand::thread_rng().gen();

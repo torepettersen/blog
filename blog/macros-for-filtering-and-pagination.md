@@ -1,6 +1,6 @@
 ---
 title: "Rust Web Development Tutorial: Macros"
-description: "A tutorial on how to use macros to reduce boilerplate code and imporve readability."
+description: "A tutorial on how to use macros to reduce boilerplate code and improve readability."
 categories: [rust, tutorial]
 date: 2020-01-26T11:38:00
 ---
