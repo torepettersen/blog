@@ -82,7 +82,7 @@ To activate logging and environment variable we would only need to make a few sm
 
 The `dotenv().ok()` function will grab the environment variables from the `.env` file and add them to our servers environment variables. This way we could use these variables by using the `std::env::var()` function, as we have done for setting the host and port.
 
-The log crate will provide five micros that we could use for writing log messages. One for each log level: `error!`, `warn!`, `info!` `debug!` and `trace!`. To see our log messages in `stdout` or `stderr` we need to initiate the `env_logger` which we do with a single function: `env_logger::init()`.
+The log crate will provide five macros that we could use for writing log messages. One for each log level: `error!`, `warn!`, `info!` `debug!` and `trace!`. To see our log messages in `stdout` or `stderr` we need to initiate the `env_logger` which we do with a single function: `env_logger::init()`.
 
 ## Api endpoints
 Our API will be sending and receiving json data, so we need a way to Serialize and Deserialize json into a data structure recognized by Rust. For this we are going to use Serde. So we need to add that to our list of dependencies.
